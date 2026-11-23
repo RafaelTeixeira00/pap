@@ -42,6 +42,7 @@ $errors = [];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#090909">
+    <link rel="icon" type="image/png" href="Icon.png">
     <title><?= e(t('PowerLift Gym — Supera os teus limites')) ?></title>
     <style>
         :root {
@@ -57,7 +58,7 @@ $errors = [];
         }
 
         * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        html { scroll-behavior: smooth; scroll-padding-top: 104px; }
         body {
             margin: 0;
             background: var(--bg);
@@ -78,15 +79,14 @@ $errors = [];
             backdrop-filter: blur(12px);
         }
         .nav {
-            min-height: 78px;
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 24px;
         }
-        .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 23px; font-weight: 800; white-space: nowrap; }
-        .brand-mark { width: 43px; height: 34px; color: var(--red); }
-        .brand span span { color: var(--red); }
+        .brand { display: inline-flex; align-items: center; white-space: nowrap; }
+        .brand-logo { display: block; width: 90px; height: 86px; object-fit: contain; }
         .nav-links { display: flex; align-items: center; gap: clamp(16px, 3vw, 38px); }
         .nav-links a { color: #ddd; font-size: 14px; font-weight: 700; transition: color .2s; }
         .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--red); }
@@ -262,18 +262,17 @@ $errors = [];
         @media (max-width: 900px) {
             .nav-links { gap: 16px; }
             .nav-actions .button { padding: 0 13px; }
-            .brand { font-size: 20px; }
             .hero-copy { width: 68%; }
             .hero-athlete { right: 0; width: 48vw; }
             .schedule-layout { grid-template-columns: 1fr; gap: 28px; }
         }
         @media (max-width: 700px) {
             .wrap { width: min(100% - 32px, var(--max)); }
-            .nav { min-height: 68px; }
+            .nav { min-height: 90px; }
             .menu-toggle { display: inline-grid; place-items: center; }
             .nav-links {
                 position: absolute;
-                top: 68px;
+                top: 90px;
                 right: 0;
                 left: 0;
                 display: none;
@@ -290,8 +289,7 @@ $errors = [];
             .nav-login-mobile:hover { color: var(--red); }
             .nav-actions .button { min-height: 40px; padding: 0 12px; font-size: 13px; }
             .nav-actions .button-outline { display: none; }
-            .brand { font-size: 18px; gap: 7px; }
-            .brand-mark { width: 36px; }
+            .brand-logo { width: 76px; height: 72px; }
             .hero { min-height: 560px; align-items: flex-start; background: linear-gradient(90deg, rgba(9,9,9,.98), rgba(9,9,9,.55)), repeating-linear-gradient(90deg, #151515 0 3px, #0d0d0d 3px 82px); }
             .hero-copy { width: 100%; padding: 55px 0 240px; }
             .hero-athlete { right: 0; width: 66vw; height: 270px; bottom: -4px; opacity: .74; }
@@ -320,10 +318,7 @@ $errors = [];
 <header class="site-header">
     <div class="wrap nav">
         <a class="brand" href="#inicio" aria-label="<?= e(t('PowerLift Gym, início')) ?>">
-            <svg class="brand-mark" viewBox="0 0 64 44" fill="none" aria-hidden="true">
-                <path d="M4 17v10M11 9v26M18 4v36M24 17v10M40 17v10M46 4v36M53 9v26M60 17v10M18 19h28v6H18z" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span>PowerLift <span>Gym</span></span>
+            <?php include __DIR__ . DIRECTORY_SEPARATOR . 'Icon.php'; ?>
         </a>
         <button class="menu-toggle" type="button" aria-label="<?= e(t('Abrir menu')) ?>" aria-expanded="false" aria-controls="nav-links">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -334,11 +329,11 @@ $errors = [];
             <a href="#planos"><?= e(t('Planos')) ?></a>
             <a href="#horarios"><?= e(t('Horários')) ?></a>
             <a href="#sobre"><?= e(t('Sobre Nós')) ?></a>
-            <a class="nav-login-mobile" href="login.php"><?= e(t('Login / Área de Cliente')) ?></a>
+            <a class="nav-login-mobile" href="SignIn.php"><?= e(t('Login / Área de Cliente')) ?></a>
         </nav>
         <div class="nav-actions">
             <?= language_selector() ?>
-            <a class="button button-outline" href="login.php"><?= e(t('Login')) ?></a>
+            <a class="button button-outline" href="SignIn.php"><?= e(t('Login')) ?></a>
             <a class="button" href="#marcar"><?= e(t('Marcar Horário')) ?></a>
         </div>
     </div>

@@ -16,5 +16,5 @@ if (
 
 $_SESSION = [];
 session_regenerate_id(true);
-header('Location: login.php');
+header('Location: SignIn.php');
 exit;

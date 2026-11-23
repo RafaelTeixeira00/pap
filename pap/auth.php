@@ -75,7 +75,7 @@ function require_client()
 {
     $client = app_current_client();
     if ($client === null || !isset($client['id'])) {
-        header('Location: login.php');
+        header('Location: SignIn.php');
         exit;
     }
 
@@ -87,7 +87,7 @@ function require_client()
 
     if (!$account || (int) $account['is_active'] !== 1) {
         unset($_SESSION['client']);
-        header('Location: login.php');
+        header('Location: SignIn.php');
         exit;
     }
 
@@ -106,7 +106,7 @@ function require_admin()
     $client = require_client();
     if (empty($client['is_admin'])) {
         unset($_SESSION['client']);
-        header('Location: login.php');
+        header('Location: SignIn.php');
         exit;
     }
 

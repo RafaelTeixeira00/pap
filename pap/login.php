@@ -12,8 +12,9 @@ $loginError = '';
 $loginStatus = 200;
 $email = '';
 
-if (app_current_client() !== null && ($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
-    header('Location: area-cliente.php');
+$currentClient = app_current_client();
+if ($currentClient !== null && ($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+    header('Location: ' . (!empty($currentClient['is_admin']) ? 'admin.php' : 'area-cliente.php'));
     exit;
 }
 
@@ -78,6 +79,7 @@ if ($loginError !== '') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#090909">
+    <link rel="icon" type="image/png" href="Icon.png">
     <title><?= e(t('Login')) ?> — PowerLift Gym</title>
     <style>
         :root {
@@ -109,13 +111,9 @@ if ($loginError !== '') {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
             margin-bottom: 26px;
-            font-size: 23px;
-            font-weight: 800;
         }
-        .brand-mark { width: 43px; height: 34px; color: var(--red); }
-        .brand-name span { color: var(--red); }
+        .brand-logo { display: block; width: 200px; height: 190px; object-fit: contain; }
         .panel {
             padding: clamp(24px, 7vw, 38px);
             border: 1px solid var(--line);
@@ -176,6 +174,9 @@ if ($loginError !== '') {
             text-align: center;
         }
         .back-link:hover { color: #fff; }
+        .register-link { margin: 20px 0 0; color: var(--muted); font-size: 14px; text-align: center; }
+        .register-link a { color: #fff; font-weight: 700; }
+        .register-link a:hover { color: var(--red); }
         .language-switch { display: flex; justify-content: center; align-items: center; gap: 6px; margin: -12px 0 20px; }
         .language-switch select, .language-switch button { min-height: 36px; border: 1px solid var(--line); border-radius: 7px; background: #111; color: #fff; font: inherit; font-size: 13px; }
         .language-switch select { padding: 0 8px; }
@@ -184,23 +185,21 @@ if ($loginError !== '') {
         @media (max-width: 480px) {
             body { padding: 18px; }
             h1 { font-size: 28px; }
+            .brand-logo { width: 170px; height: 160px; }
         }
     </style>
 </head>
 <body>
     <main class="login-shell">
         <a class="brand" href="index.php" aria-label="<?= e(t('PowerLift Gym, início')) ?>">
-            <svg class="brand-mark" viewBox="0 0 64 44" fill="none" aria-hidden="true">
-                <path d="M4 17v10M11 9v26M18 4v36M24 17v10M40 17v10M46 4v36M53 9v26M60 17v10M18 19h28v6H18z" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="brand-name">PowerLift <span>Gym</span></span>
+            <?php include __DIR__ . DIRECTORY_SEPARATOR . 'Icon.php'; ?>
         </a>
         <?= language_selector() ?>
         <section class="panel" aria-labelledby="login-title">
             <p class="eyebrow"><?= e(t('Área de cliente')) ?></p>
             <h1 id="login-title"><?= e(t('Inicia sessão')) ?></h1>
             <p class="intro"><?= e(t('Entra na tua conta PowerLift.')) ?></p>
-            <form method="post" action="login.php">
+            <form method="post" action="SignIn.php">
                 <input type="hidden" name="auth_csrf_token" value="<?= e(app_csrf_token()) ?>">
                 <div class="field">
                     <label for="email"><?= e(t('Email')) ?></label>
@@ -214,9 +213,8 @@ if ($loginError !== '') {
             </form>
             <?php if ($loginError !== ''): ?>
                 <p class="notice" role="alert"><?= e(t($loginError)) ?></p>
-            <?php else: ?>
-                <p class="notice" role="status"><?= e(t('A receção fornece as credenciais de acesso. Se ainda não consegues entrar, contacta a receção.')) ?></p>
             <?php endif; ?>
+            <p class="register-link"><?= e(t('Ainda não tens conta?')) ?> <a href="registar.php"><?= e(t('Criar conta')) ?></a></p>
         </section>
         <a class="back-link" href="index.php"><?= e(t('← Voltar à página inicial')) ?></a>
     </main>

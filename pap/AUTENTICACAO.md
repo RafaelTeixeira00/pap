@@ -19,7 +19,7 @@ Esta área usa PHP com MySQL/MariaDB. No XAMPP, inicia Apache e MySQL antes de c
    ```
 
    Introduz nome, email e uma palavra-passe inicial com pelo menos 12 caracteres. A palavra-passe é pedida sem aparecer no terminal; comunica-a ao cliente por um canal seguro.
-6. O administrador inicia sessão em `login.php` e é encaminhado para `admin.php`. Os clientes são encaminhados para `area-cliente.php`, onde podem consultar e cancelar as suas marcações futuras. Não existe registo público.
+6. O administrador inicia sessão em `SignIn.php` e é encaminhado para `admin.php`. Qualquer pessoa pode criar uma conta de cliente em `registar.php` e, após o registo, acede a `area-cliente.php` para consultar e cancelar as suas marcações futuras. O registo público cria apenas contas de cliente; contas de administrador continuam a ser criadas pelo script seguro.
 7. Em `admin-config.php`, configura telefone, morada e preços reais. Os pedidos de marcação são guardados na tabela `bookings`; o email é apenas uma notificação e depende da configuração SMTP do XAMPP.
 8. A página `privacidade.php` é um modelo inicial para o projeto. Antes de publicar, confirma a identificação legal do responsável, a morada e os prazos de conservação dos dados.
 

@@ -28,6 +28,7 @@ Desenvolver um website para apresentar o PowerLift Gym e apoiar o processo de ma
 ### Visitante
 
 - Consulta a informação e os planos.
+- Cria uma conta de cliente para aceder à área de cliente.
 - Pede uma marcação e aceita a política de privacidade.
 - Consulta contactos e muda o idioma.
 
@@ -83,8 +84,8 @@ Uma marcação pública pode não estar associada a uma conta. Quando o email da
 1. Iniciar Apache e MySQL no XAMPP.
 2. Importar `auth-schema.sql` numa instalação nova. Para uma base de dados que já usa o esquema anterior, importar `pap-upgrade.sql`.
 3. Criar `C:\xampp\pap-private-data\auth-config.php` a partir de `auth-config.example.php` e configurar a ligação MySQL.
-4. Executar `create-admin.ps1` para criar a conta administrativa e `create-client.ps1` para criar contas de clientes.
-5. Iniciar sessão em `login.php`. O administrador é encaminhado para `admin.php`; os clientes para `area-cliente.php`.
+4. Executar `create-admin.ps1` para criar a conta administrativa. Os clientes podem criar uma conta em `registar.php`; a receção também pode criar contas através de `create-client.ps1`.
+5. Iniciar sessão em `SignIn.php`. O administrador é encaminhado para `admin.php`; os clientes para `area-cliente.php`.
 6. Configurar contactos e preços em `admin-config.php`.
 7. Configurar SMTP no XAMPP para receber notificações por email. As marcações continuam guardadas na base de dados se o email não for enviado.
 
